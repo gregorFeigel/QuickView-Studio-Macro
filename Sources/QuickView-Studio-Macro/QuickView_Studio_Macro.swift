@@ -1,11 +1,17 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
 
-/// A macro that produces both a value and a string containing the
-/// source code that generated the value. For example,
-///
-///     #stringify(x + y)
-///
-/// produces a tuple `(x + y, "x + y")`.
-@freestanding(expression)
-public macro stringify<T>(_ value: T) -> (T, String) = #externalMacro(module: "QuickView_Studio_MacroMacros", type: "StringifyMacro")
+// Generates the code needed to compile class into dylib for QuickView Studio
+/// - Checks for conformance of QuickViewStudioPlugin
+/// - adds builder method
+@attached(peer, names: suffixed(QuickViewStudioPluginBuilder), named(createPlugin))
+@attached(member, names: arbitrary)
+public macro QuickViewPlugin() = #externalMacro( module: "QuickView_Studio_MacroMacros", type: "QuickViewPlugin")
+
+
+
+// Generates the code needed to create a NodeProcessor class QuickView Studio
+/// - Checks for conformance of QuickViewStudioPlugin, NodeProcessor
+/// - adds builder method
+@attached(extension, conformances: QuickViewStudioPlugin)
+@attached(member, names: arbitrary)
+public macro Processor() = #externalMacro( module: "QuickView_Studio_MacroMacros", type: "Processor")
+

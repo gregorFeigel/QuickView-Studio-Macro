@@ -1,11 +1,11 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 import CompilerPluginSupport
 
 let package = Package(
-    name: "QuickView-Studio-Macro",
+    name: "QuickViewStudio-Macro",
     platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .macCatalyst(.v13)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -13,6 +13,7 @@ let package = Package(
             name: "QuickView-Studio-Macro",
             targets: ["QuickView-Studio-Macro"]
         ),
+        
         .executable(
             name: "QuickView-Studio-MacroClient",
             targets: ["QuickView-Studio-MacroClient"]
@@ -25,6 +26,7 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         // Macro implementation that performs the source transformation of a macro.
+
         .macro(
             name: "QuickView-Studio-MacroMacros",
             dependencies: [
@@ -32,7 +34,7 @@ let package = Package(
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
             ]
         ),
-
+        
         // Library that exposes a macro as part of its API, which is used in client programs.
         .target(name: "QuickView-Studio-Macro", dependencies: ["QuickView-Studio-MacroMacros"]),
 
