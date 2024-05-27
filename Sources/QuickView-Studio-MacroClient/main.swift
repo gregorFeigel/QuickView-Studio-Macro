@@ -14,6 +14,12 @@ class SomeModel: CodePlugin {
  
 @Processor
 class SomeNodeProcessor: ProcessorNode {
+    let name: String = ""
+    let description: String = ""
+    let version: Version = .init(major: 0, minor: 0, patch: 1)
+    let author: String = ""
+    let type: PluginType = .code
+    
     @Input var myVar: Int = 0
     @Input var myVar2: Int = 0
     @Output var firstOutput: Double = 0    

@@ -60,7 +60,7 @@ public enum PluginType: String, Equatable, Hashable, Codable {
     case geospatialAnalysis = "geospatialAnalysis"
     case other = "other"
 
-    var shortDescription: String {
+    public var shortDescription: String {
         switch self {
         case .dataVisualisation:
             return "DataV"
@@ -83,7 +83,7 @@ public enum PluginType: String, Equatable, Hashable, Codable {
         }
     }
     
-    var protocolType: Any.Type {
+    public var protocolType: Any.Type {
         switch self {
             case .dataVisualisation:
                 break
@@ -130,9 +130,9 @@ extension String: Error {}
 
 // MARK: - Plugin Handler
 
-final class PluginHandler {
+public final class PluginHandler {
     
-    var plugins: [QuickViewStudioPlugin] = []
+    public var plugins: [QuickViewStudioPlugin] = []
     
     
     
@@ -149,7 +149,7 @@ open class PluginBuilder<T> {
     }
 }
 
-func load<T: Any>(url: URL) throws -> T {
+public func load<T: Any>(url: URL) throws -> T {
 
     typealias InitFunction = @convention(c) () -> UnsafeMutableRawPointer
     
@@ -181,7 +181,7 @@ func load<T: Any>(url: URL) throws -> T {
     }
 }
 
-func load<T>(url: URL, type: T.Type) throws -> T {
+public func load<T>(url: URL, type: T.Type) throws -> T {
 
     typealias InitFunction = @convention(c) () -> UnsafeMutableRawPointer
     

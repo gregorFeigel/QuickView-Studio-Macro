@@ -29,7 +29,7 @@ public struct Processor: MemberMacro {
         let superInit: DeclSyntax = """
               override init() {
                 super.init()
-                self.sockets = [\(raw: input), \(raw: output)]
+                self.sockets = [\(raw: [input].joined(separator: ","))]
               }
               """
         return [ superInit ]
