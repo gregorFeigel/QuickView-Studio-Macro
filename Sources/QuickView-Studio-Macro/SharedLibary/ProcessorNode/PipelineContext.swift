@@ -9,27 +9,29 @@ import Foundation
 import SwiftUI
 
 // MARK: - Base Node
-enum ConsoleMessageType {
+public enum ConsoleMessageType {
     case print
     case info
     case error
     case warning
 }
 
-struct ConsoleMessage: Identifiable {
-    let id: UUID = UUID()
-    let msg: String
-    let date: Date
-    let originator: String
-    let type: ConsoleMessageType
+public struct ConsoleMessage: Identifiable {
+    public let id: UUID = UUID()
+    public let msg: String
+    public let date: Date
+    public let originator: String
+    public let type: ConsoleMessageType
 }
 
 public class PipeLineContext: Observable, ObservableObject {
-    var isCancelled: Bool = false
-    var hasChanged: Bool = false
-    @Published var consoleLog: [ConsoleMessage] = []
+    public init() {}
     
-    func info(originator: String = "Unkown", _ message: String...) {
+    public var isCancelled: Bool = false
+    public var hasChanged: Bool = false
+    @Published public var consoleLog: [ConsoleMessage] = []
+    
+    public func info(originator: String = "Unkown", _ message: String...) {
            let concatenatedMessage = message.joined(separator: " ")
            let consoleMessage = ConsoleMessage(
                msg: concatenatedMessage,
@@ -39,7 +41,7 @@ public class PipeLineContext: Observable, ObservableObject {
             self.consoleLog.append(consoleMessage)
     }
     
-    func error(_ error: Error, originator: String = "Unkown") {
+    public func error(_ error: Error, originator: String = "Unkown") {
         let consoleMessage = ConsoleMessage(
             msg: error.localizedDescription + " \(error)",
             date: Date(),
@@ -48,9 +50,9 @@ public class PipeLineContext: Observable, ObservableObject {
          self.consoleLog.append(consoleMessage)
     }
     
-    func print(_ message: String) {}
+    public func print(_ message: String) {}
     
-    func warning(_ message: String) {}
+    public func warning(_ message: String) {}
     
-    func changed() { hasChanged.toggle(); self.objectWillChange.send(); print("context has changed") }
+    public func changed() { hasChanged.toggle(); self.objectWillChange.send(); print("context has changed") }
 }
