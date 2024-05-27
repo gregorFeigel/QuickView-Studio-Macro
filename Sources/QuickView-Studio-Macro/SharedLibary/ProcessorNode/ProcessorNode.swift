@@ -46,7 +46,7 @@ extension ProcessorNode: ObservableObject, Observable { }
 
 // Sockets
 extension ProcessorNode {
-    func socketFor(key: String) throws -> Socket {
+   public func socketFor(key: String) throws -> Socket {
         guard let socket = sockets.first(where: { $0.key == key })
         else { throw "no sock named \(key)" }
         return socket

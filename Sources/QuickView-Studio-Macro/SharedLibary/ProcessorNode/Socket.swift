@@ -8,25 +8,25 @@
 import Foundation
 import SwiftUI
 
-class AnyInput: InputType {
-    func set(_ value: Any) throws {  }
+public class AnyInput: InputType {
+    public func set(_ value: Any) throws {  }
     
-    func matchType(_ value: Any) -> Bool { false }
+    public func matchType(_ value: Any) -> Bool { false }
     
-    var id: String = ""
+    public var id: String = ""
 }
 
-class AnyOutput: OutputType {
-    var value: Any = ""
-    var id: String = ""
+public class AnyOutput: OutputType {
+    public var value: Any = ""
+    public var id: String = ""
 }
 
 public enum SocketType {
     case input(InputType)
     case output(OutputType)
     
-    static var input: SocketType { return.input(AnyInput()) }
-    static var output: SocketType { return.output(AnyOutput()) }
+    public static var input: SocketType { return.input(AnyInput()) }
+    public static var output: SocketType { return.output(AnyOutput()) }
 }
 
 public final class Socket: Identifiable {
